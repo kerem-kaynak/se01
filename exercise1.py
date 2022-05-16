@@ -1,4 +1,8 @@
+# Sample board
+
 board = [[1,2,3],[4,4,5],[5,3,4]]
+
+# Check if chosen cells are adjacent
 
 def check_adjacency(r1, r2, c1, c2):
     if ((r1 - r2 == 1) | (r1 - r2 == -1)) & (c1 - c2 == 0):
@@ -8,6 +12,8 @@ def check_adjacency(r1, r2, c1, c2):
     else:
         print('\nNon-adjacent cells!')
         return False
+
+# Check if the move forms a complete row or column
 
 def check_3(board, r1, r2, c1, c2):
     temp_board = board.copy()
@@ -28,6 +34,8 @@ def check_3(board, r1, r2, c1, c2):
     print('\nNo complete rows or columns were found!')
     return False
 
+# Take user input and check whether it satisfies all conditions
+
 def check_legal(board):
     for i in range(len(board)):
         print(board[i])
@@ -47,5 +55,7 @@ def check_legal(board):
     else:
         print('\nInvalid coordinates!')
         return False
+
+# Run
 
 check_legal(board)

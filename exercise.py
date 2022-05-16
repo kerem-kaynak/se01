@@ -1,6 +1,6 @@
 # Sample board
 
-board = [[1,2,3],[4,4,5],[5,3,4]]
+board = [[1,2,1,3],[4,1,5,4],[1,4,3,5],[6,7,6,2]]
 
 # Check if chosen cells are adjacent
 
@@ -20,13 +20,13 @@ def check_3(board, r1, r2, c1, c2):
     temp_board[r1][c1], temp_board[r2][c2] = temp_board[r2][c2], temp_board[r1][c1]
 
     for i in range(len(temp_board)):
-        if temp_board[i][0] == temp_board[i][1] == temp_board[i][2]:
+        if (temp_board[i][0] == temp_board[i][1] == temp_board[i][2]) | (temp_board[i][1] == temp_board[i][2] == temp_board[i][3]):
             for i in range(len(temp_board)):
                 print(temp_board[i])
             return True
 
     for i in range(len(temp_board[0])):
-        if temp_board[0][i] == temp_board[1][i] == temp_board[2][i]:
+        if (temp_board[0][i] == temp_board[1][i] == temp_board[2][i]) | (temp_board[1][i] == temp_board[2][i] == temp_board[3][i]):
             for i in range(len(temp_board)):
                 print(temp_board[i])
             return True
@@ -45,7 +45,7 @@ def check_legal(board):
     row_2 = int(input('Enter row of second cell:')) - 1
     col_2 = int(input('Enter column of second cell:')) - 1
 
-    if (0 <= row_1 <= 2) & (0 <= col_1 <= 2) & (0 <= row_2 <= 2) & (0 <= col_2 <= 2):
+    if (0 <= row_1 <= 3) & (0 <= col_1 <= 3) & (0 <= row_2 <= 3) & (0 <= col_2 <= 3):
         adjacency = check_adjacency(row_1, row_2, col_1, col_2)
         if adjacency:
             complete_3 = check_3(board, row_1, row_2, col_1, col_2)

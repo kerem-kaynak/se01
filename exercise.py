@@ -1,6 +1,6 @@
 # Sample board
 
-board = [[1,2,1,3],[4,1,5,4],[1,4,3,5],[6,7,6,2]]
+board = [[1,2,1,5],[1,1,1,1],[3,4,1,5],[6,7,6,1]]
 
 # Check if chosen cells are adjacent
 
@@ -15,23 +15,33 @@ def check_adjacency(r1, r2, c1, c2):
 
 # Check if the move forms a complete row or column
 
-def check_3(board, r1, r2, c1, c2):
+def check_pattern(board, r1, r2, c1, c2):
     temp_board = board.copy()
     temp_board[r1][c1], temp_board[r2][c2] = temp_board[r2][c2], temp_board[r1][c1]
 
     for i in range(len(temp_board)):
-        if (temp_board[i][0] == temp_board[i][1] == temp_board[i][2]) | (temp_board[i][1] == temp_board[i][2] == temp_board[i][3]):
-            for i in range(len(temp_board)):
-                print(temp_board[i])
-            return True
-
-    for i in range(len(temp_board[0])):
-        if (temp_board[0][i] == temp_board[1][i] == temp_board[2][i]) | (temp_board[1][i] == temp_board[2][i] == temp_board[3][i]):
-            for i in range(len(temp_board)):
-                print(temp_board[i])
-            return True
+        if (temp_board[i][0] == temp_board[i][1] == temp_board[i][2]):
+            if (i in [0,1]) & ((temp_board[i][0] == temp_board[i+1][0] == temp_board[i+2][0]) | (temp_board[i][1] == temp_board[i+1][1] == temp_board[i+2][1]) | (temp_board[i][2] == temp_board[i+1][2] == temp_board[i+2][2])):
+                for i in range(len(temp_board)):
+                    print(temp_board[i])
+                return True
+            if (i in [2,3]) & ((temp_board[i][0] == temp_board[i-1][0] == temp_board[i-2][0]) | (temp_board[i][1] == temp_board[i-1][1] == temp_board[i-2][1]) | (temp_board[i][2] == temp_board[i-1][2] == temp_board[i-2][2])):
+                for i in range(len(temp_board)):
+                    print(temp_board[i])
+                return True
+        if (temp_board[i][1] == temp_board[i][2] == temp_board[i][3]):
+            if (i in [0,1]) & ((temp_board[i][1] == temp_board[i+1][1] == temp_board[i+2][1]) | (temp_board[i][2] == temp_board[i+1][2] == temp_board[i+2][2]) | (temp_board[i][3] == temp_board[i+1][3] == temp_board[i+2][3])):
+                for i in range(len(temp_board)):
+                    print(temp_board[i])
+                return True
+            if (i in [2,3]) & ((temp_board[i][1] == temp_board[i-1][1] == temp_board[i-2][1]) | (temp_board[i][2] == temp_board[i-1][2] == temp_board[i-2][2]) | (temp_board[i][3] == temp_board[i-1][3] == temp_board[i-2][3])):
+                for i in range(len(temp_board)):
+                    print(temp_board[i])
+                return True
     
-    print('\nNo complete rows or columns were found!')
+    for i in range(len(temp_board)):
+        print(temp_board[i])
+    print('\nNo special patterns were found!')
     return False
 
 # Take user input and check whether it satisfies all conditions
@@ -48,7 +58,7 @@ def check_legal(board):
     if (0 <= row_1 <= 3) & (0 <= col_1 <= 3) & (0 <= row_2 <= 3) & (0 <= col_2 <= 3):
         adjacency = check_adjacency(row_1, row_2, col_1, col_2)
         if adjacency:
-            complete_3 = check_3(board, row_1, row_2, col_1, col_2)
+            complete_3 = check_pattern(board, row_1, row_2, col_1, col_2)
             if complete_3:
                 print('\nValid move!')
                 return True
